@@ -41,7 +41,8 @@
                                 </div>
                                 <div class="d-flex justify-content-end me-5">
                                     <a href="{{ route('datasites.index') }}" class="btn btn-danger">
-                                        Kembali
+                                        <i class="bi bi-arrow-left-circle"></i>
+                                         Kembali
                                     </a>
                                 </div>
                             </div>
@@ -52,7 +53,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="">
-                                    <a href="{{ route('historyprogresses.create', $datasites->id) }}" class="btn btn-info mb-3 ms-auto">New History</a>
+                                    <a href="{{ route('historyprogresses.create', $datasites->id) }}" class="btn btn-info mb-3 ms-auto"><i class="bi bi-plus-circle"></i> New History</a>
                                     {{-- <a href="{{ route('historyprogresses.create') }}" class="btn btn-primary mb-3 ms-auto">New History</a> --}}
                                 </div>
                                 <table class="table table-striped" id="table1">
@@ -72,7 +73,7 @@
                                             <td class="text-center align-middle">{{ $historyprogress->detail }}</td>
                                             <td class="text-center align-middle">
                                                 <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-pencil-square"></i> Delete</a>
+                                                <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Delete</a>
                                                 {{-- <form id="delete-form-{{ $category->id }}"
                                                     action="#"
                                                     method="POST"

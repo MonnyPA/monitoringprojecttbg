@@ -16,7 +16,7 @@
                                     </div>
                                 @endif
                                 <div class="">
-                                    <a href="{{ route('datasites.create') }}" class="btn btn-info mb-3 ms-auto">Tambah Data Site</a>
+                                    <a href="{{ route('datasites.create') }}" class="btn btn-info mb-3 ms-auto"><i class="bi bi-plus-circle"></i> Tambah Data Site</a>
                                 </div>
                                 <table class="table table-striped" id="table1">
                                     <thead>
@@ -24,11 +24,11 @@
                                             <th class="text-center">No</th>
                                             <th class="text-center">Site ID</th>
                                             <th class="text-center">Site Name</th>
+                                            <th class="text-center">Status Project</th>
                                             <th class="text-center">Longitude</th>
                                             <th class="text-center">Lattitude</th>
-                                            <th class="text-center">Kota / Kabupaten</th>
+                                            {{-- <th class="text-center">Kota / Kabupaten</th> --}}
                                             <th class="text-center">Name Mitra</th>
-                                            <th class="text-center">Status Project</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -38,10 +38,6 @@
                                             <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                             <td class="text-center align-middle"><a href="{{ route('datasites.show', $datasite->id) }}">{{ $datasite->site_id }}</a></td>
                                             <td class="text-center align-middle">{{ $datasite->site_name }}</td>
-                                            <td class="text-center align-middle">{{ $datasite->long }}</td>
-                                            <td class="text-center align-middle">{{ $datasite->lat }}</td>
-                                            <td class="text-center align-middle">{{ $datasite->kabupaten }}</td>
-                                            <td class="text-center align-middle">{{ $datasite->mitra->mit_name }}</td>
                                             <td class="text-center align-middle">
                                                 @if($datasite->statusproject->status_name == 'Sitac')
                                                     <span class="text-info">Sitac</span>
@@ -53,6 +49,10 @@
                                                     <span class="text-success">RFI</span>
                                                 @endif
                                             </td>
+                                            <td class="text-center align-middle">{{ $datasite->long }}</td>
+                                            <td class="text-center align-middle">{{ $datasite->lat }}</td>
+                                            {{-- <td class="text-center align-middle">{{ $datasite->kabupaten }}</td> --}}
+                                            <td class="text-center align-middle">{{ $datasite->mitra->mit_name }}</td>
                                             <td class="text-center align-middle">
                                                 <a href="{{ route('datasites.edit', $datasite->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
                                                 {{-- <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-pencil-square"></i> Delete</a> --}}

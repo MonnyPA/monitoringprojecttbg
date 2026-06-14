@@ -22,3 +22,18 @@ Route::post(
     '/datasites/{id}/historyprogresses',
     [HistoryprogressController::class, 'store']
 )->name('historyprogresses.store');
+
+Route::get(
+    '/historyprogresses/{id}/edit',
+    [HistoryprogressController::class, 'edit']
+)->name('historyprogresses.edit');
+
+Route::put(
+    '/historyprogresses/{id}',
+    [HistoryprogressController::class, 'update']
+)->name('historyprogresses.update');
+
+Route::delete(
+    '/historyprogresses/{id}',
+    [HistoryprogressController::class, 'destroy']
+)->name('historyprogresses.destroy');

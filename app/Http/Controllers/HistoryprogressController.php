@@ -29,4 +29,39 @@ class HistoryprogressController extends Controller
             ->route('datasites.show', $request->datasite_id)
             ->with('success', 'History progress berhasil ditambahkan');
     }
+
+    public function edit($id)
+    {
+        $historyprogress = Historyprogress::findOrFail($id);
+
+        return view('historyprogresses.edit', compact('historyprogress'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $historyprogress = Historyprogress::findOrFail($id);
+
+        $validate = $request->validate([
+            'detail' => 'required',
+        ]);
+
+        $historyprogress->update($validate);
+
+        return redirect()
+            ->route('datasites.show', $historyprogress->datasite_id)
+            ->with('success', 'History progress berhasil diupdate');
+    }
+
+    public function destroy($id)
+    {
+        $historyprogress = Historyprogress::findOrFail($id);
+
+        $datasiteId = $historyprogress->datasite_id;
+
+        $historyprogress->delete();
+
+        return redirect()
+            ->route('datasites.show', $datasiteId)
+            ->with('success', 'History progress berhasil dihapus');
+    }
 }
