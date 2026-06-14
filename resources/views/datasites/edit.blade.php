@@ -10,7 +10,7 @@
                         <div class="card bg-secondary">
                             <div class="card-header bg-light text-white">
                                 <div>
-                                    <h4>Create New Data Site</h4>
+                                    <h4>Update Data Site</h4>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -49,13 +49,14 @@
                                             <select name="mitra_id" id="mitra_id" class="form-control @error('mitra_id') is-invalid @enderror" required>
                                                 <option value="">Select Mitra</option>
                                                 @foreach($mitras as $mitra)
-                                                    <option value="{{ $mitra->id }}" @if(old('mitra_id', $datasite->mitra_id) == $datasite->mitra_id) selected @endif>
+                                                    <option value="{{ $mitra->id }}"
+                                                        @if(old('mitra_id', $datasite->mitra_id) == $mitra->id) selected @endif>
                                                         {{ $mitra->mit_name }}
                                                     </option>
                                                 @endforeach
-                                                @error('mitra_id')
+                                                {{-- @error('mitra_id')
                                                 <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
+                                                @enderror --}}
                                             </select>
                                         </div>
                                         <div class="mb-3">
@@ -63,18 +64,18 @@
                                             <select name="statusproject_id" id="statusproject_id" class="form-control @error('statusproject_id') is-invalid @enderror" required>
                                                 <option value="">Select Status Project</option>
                                                 @foreach($statusprojects as $statusproject)
-                                                    <option value="{{ $statusproject->id }}" @if(old('statusproject_id', $datasite->statusproject_id) == $datasite->statusproject_id) selected @endif>
+                                                    <option value="{{ $statusproject->id }}" @if(old('statusproject_id', $datasite->statusproject_id) == $statusproject->id) selected @endif>
                                                         {{ $statusproject->status_name }}
                                                     </option>
                                                 @endforeach
-                                                @error('mitra_id')
+                                                {{-- @error('mitra_id')
                                                 <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
+                                                @enderror --}}
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="catatan" class="form-label">Catatan :</label>
-                                            <input type="textarea" class="form-control" id="catatan" aria-desareacribedby="emailHelp" name="catatan" placeholder="Silahkan Masukan Catatan" value="{{ old('catatan', $datasite->catatan) }}">
+                                            <input type="textarea" class="form-control" id="catatan" aria-desareacribedby="emailHelp" name="catatan" placeholder="Silahkan Masukan Catatan" value="{{ old('catatan', $datasite->catatan ?: 'Belum ada catatan') }}">
                                         </div>
 
                                     </div>
@@ -90,7 +91,7 @@
                                     </div> --}}
                                 </div>
                                 <button type="submit" class="btn btn-success">Submit</button>
-                                <a href="#" class="btn btn-danger ms-2">Cancel</a>
+                                <a href="{{ route('datasites.index') }}" class="btn btn-danger ms-2">Cancel</a>
                             </form>
                             </div>
                         </div>

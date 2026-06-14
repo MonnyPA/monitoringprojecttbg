@@ -10,8 +10,9 @@
                         <div class="card bg-secondary">
                             <div class="card-body">
                                 @if(session('success'))
-                                    <div class="alert alert-success">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"">
                                         {{ session('success') }}
+                                        <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" style="font-size: 0.7rem;"></button>
                                     </div>
                                 @endif
                                 <div class="">
@@ -41,22 +42,25 @@
                                             <td class="text-center align-middle">{{ $datasite->lat }}</td>
                                             <td class="text-center align-middle">{{ $datasite->kabupaten }}</td>
                                             <td class="text-center align-middle">{{ $datasite->mitra->mit_name }}</td>
-                                            <td class="text-center align-middle">{{ $datasite->statusproject->status_name }}</td>
+                                            <td class="text-center align-middle">
+                                                @if($datasite->statusproject->status_name == 'Sitac')
+                                                    <span class="text-info">Sitac</span>
+                                                @elseif($datasite->statusproject->status_name == 'CME')
+                                                    <span class="text-warning">CME</span>
+                                                @elseif($datasite->statusproject->status_name == 'SFRI')
+                                                    <span class="text-primary">SRFI</span>
+                                                @else
+                                                    <span class="text-success">RFI</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center align-middle">
                                                 <a href="{{ route('datasites.edit', $datasite->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-pencil-square"></i> Delete</a>
-                                                {{-- <form id="delete-form-{{ $category->id }}"
-                                                    action="#"
-                                                    method="POST"
-                                                    class="d-inline">
+                                                {{-- <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-pencil-square"></i> Delete</a> --}}
+                                                <form action="{{ route('datasites.destroy', $datasite->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button"
-                                                            class="btn btn-danger btn-sm"
-                                                            onclick="confirmDelete({{ $category->id }},  '{{ $category->cat_name }}', 'Category')">
-                                                        <i class="bi bi-trash"></i> Delete
-                                                    </button>
-                                                </form> --}}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Datasite ID?')"><i class="bi bi-trash"></i> Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -63,7 +63,7 @@ class DatasiteController extends Controller
     public function update(Request $request, Datasite $datasite)
     {
         $validate = $request->validate([
-            'site_id' => 'required',
+            'site_id' => 'required|unique:datasites,site_id',
             'site_name' => 'required|string',
             'long' => 'required|string',
             'lat' => 'required|string',
@@ -71,12 +71,24 @@ class DatasiteController extends Controller
             'mitra_id' => 'required',
             'statusproject_id' => 'required',
             'catatan' => 'sometimes|string',
-        ]);
+        ],
+        [
+            'site_id.unique' => 'Site ID sudah terdaftar.',
+            'site_id.required' => 'Site ID wajib diisi.',
+        ]
+        );
 
         // Jika berhasil validasi, maka update data
 
         $datasite->update($validate);
 
         return redirect()->route('datasites.index')->with('success', 'Datasite ' . $validate['site_id'] . ' updated successfully.');
+    }
+
+    public function destroy(Datasite $datasite)
+    {
+        $datasite->delete();
+
+        return redirect()->route('datasites.index')->with('success', 'Site ID ' . $datasite->site_id . ' deleted successfully.');
     }
 }

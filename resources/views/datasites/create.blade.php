@@ -21,7 +21,12 @@
                                     <div class="mb-3 col-md-6">
                                         <div class="mb-3">
                                             <label for="site_id" class="form-label">Site ID :</label>
-                                            <input type="text" class="form-control" id="site_id" aria-describedby="emailHelp" name="site_id" placeholder="Silahkan Masukan Site ID" required>
+                                            <input type="text" class="form-control @error('site_id') is-invalid @enderror" id="site_id" aria-describedby="emailHelp" name="site_id" placeholder="Silahkan Masukan Site ID" required>
+                                            @error('site_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label for="site_name" class="form-label">Site Name :</label>
@@ -89,7 +94,7 @@
                                     </div> --}}
                                 </div>
                                 <button type="submit" class="btn btn-success">Submit</button>
-                                <a href="#" class="btn btn-danger ms-2">Cancel</a>
+                                <a href="{{ route('datasites.index') }}" class="btn btn-danger ms-2">Cancel</a>
                             </form>
                             </div>
                         </div>
